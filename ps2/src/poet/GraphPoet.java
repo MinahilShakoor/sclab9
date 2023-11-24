@@ -71,7 +71,22 @@ public class GraphPoet {
         throw new RuntimeException("not implemented");
     }
     
-    // TODO checkRep
+    private void checkRep() {
+        // Check that the graph does not contain null nodes or values
+        for (GraphNode<String> node : graph.getNodes()) {
+            if (node == null || node.getValue() == null) {
+                throw new RuntimeException("Representation Invariant Violation: Graph contains null nodes or values.");
+            }
+        }
+    
+        // Additional representation invariants, if any, can be checked here
+    }
+    
+    /**
+     * Convert the GraphPoet object to a string representation.
+     * 
+     * @return string representation of the object
+     */
     
     /**
      * Generate a poem.
@@ -83,6 +98,23 @@ public class GraphPoet {
         throw new RuntimeException("not implemented");
     }
     
-    // TODO toString()
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+    
+        stringBuilder.append("GraphPoet {\n");
+        stringBuilder.append("  Word Affinity Graph:\n");
+    
+        for (GraphNode<String> node : graph.getNodes()) {
+            stringBuilder.append("    Node: ").append(node.getValue()).append("\n");
+            for (GraphNode<String> neighbor : graph.getAdjacentNodes(node.getValue())) {
+                stringBuilder.append("      -> ").append(neighbor.getValue()).append("\n");
+            }
+        }
+    
+        stringBuilder.append("}");
+    
+        return stringBuilder.toString();
+    }
     
 }
